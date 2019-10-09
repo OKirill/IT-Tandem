@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Impact';
+    src: url('../fonts/impact.ttf') format('truetype');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Impact', sans-serif;
+    overflow-x: hidden;
+}
+
+.header-hav ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.header-hav li {
+    margin-left: 100px;
+    font-size: 26px;
+}
+
+a {
+    color: #A97070;
+}
+
+a:hover {
+    color: rgb(167, 64, 64);
+    text-decoration: none;
+}
+
+header {
+    min-height: 110px;
+    background-color: #383838;
+}
+
+.header-hav {
+    height: 100%;
+}
+
+#page-content {
+    flex: 1 0 auto;
+}
+
+#sticky-footer {
+    flex-shrink: 0;
+}
+
+.logo {
+    max-height: 130px;
+    height: 80px;
+    margin-top: 20px;
+}
+
+
+.user-avatar {
+    box-sizing: border-box;
+    height: 262px;
+
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.profile-nav {
+    margin-top: 40px;
+}
+
+.profile-data {
+    padding: 12px 5px ;
+}
+
+.profile-name {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.profile-fullname {
+    color: #777;
+    font-size: 14px;
+}
