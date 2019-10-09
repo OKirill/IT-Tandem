@@ -1,15 +1,6 @@
-from django.shortcuts import render
-
-# Create your views here.
-from .forms import TagForm
 from django.views.generic import FormView
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import View, ListView
 from django.utils.translation import gettext_lazy as _
-from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.shortcuts import reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class SkillCreate(FormView):
