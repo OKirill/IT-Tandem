@@ -68,3 +68,13 @@ img {
     height: 80px;
     margin-top: 20px;
 }
+
+.register_form{
+    width: 300px;
+    padding-bottom:10px;
+    margin:auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
