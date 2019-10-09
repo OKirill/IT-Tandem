@@ -1,10 +1,17 @@
 from django.db import models
-
+from django.utils.translation import gettext_lazy as _
 
 class Tag(models.Model):
+
+
     name = models.CharField(max_length=128, verbose_name='Название тега')
     desc = models.TextField(verbose_name='Описание тега')
 
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name
 
 # Свзяи тегов с тегами можно реализовать по разному, но тут нужно будет подумать и потестиовать различные варианты
 class RelatedTag(models.Model):

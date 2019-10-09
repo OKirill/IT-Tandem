@@ -43,6 +43,11 @@
     </header>
 
     <div class="main">
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
         {% block content %}
 
         {% endblock %}
