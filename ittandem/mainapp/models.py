@@ -3,10 +3,9 @@ from django.utils.translation import gettext_lazy as _
 
 class Tag(models.Model):
 
-
     name = models.CharField(max_length=128, verbose_name='Название тега')
     desc = models.TextField(verbose_name='Описание тега')
-
+    # parent = models.ForeignKey('self', related_name='parents', on_delete=models.CASCADE)
     class Meta:
         ordering = ('name',)
 
@@ -25,6 +24,9 @@ class Skill(models.Model):
     user = models.ForeignKey(User, related_name='skills', on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, related_name='able', on_delete=models.CASCADE)
 
+    def __str__(self):
+
+        return self.user.username
 
 class Desire(models.Model):
     user = models.ForeignKey(User, related_name='desires', on_delete=models.CASCADE)

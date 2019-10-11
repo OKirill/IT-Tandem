@@ -22,7 +22,7 @@ import mainapp.views as mainapp
 urlpatterns = [
     path('', mainapp.main),
     path('admin/', admin.site.urls),
-    path('tag/', include('tagapp.urls', namespace='tag'))
+    path('tags/', include('tagapp.urls', namespace='tags'))
 ]
 
 if settings.DEBUG:
