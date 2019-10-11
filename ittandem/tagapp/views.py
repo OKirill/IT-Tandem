@@ -17,7 +17,6 @@ class TagCreateMixin(FormView):
     form_class_tag = None
 
     def form_valid(self, form):
-        print(self.request.user.username)
         if self.request.user.id:
             self.model_tag.objects.filter(user=self.request.user).delete()
             for skill in form.cleaned_data['name']:
