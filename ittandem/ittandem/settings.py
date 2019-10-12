@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'authapp',
     'django_select2',
     'tagapp',
+    'search',
+    'projectapp'
 ]
 
 MIDDLEWARE = [

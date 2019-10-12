@@ -22,7 +22,10 @@ import mainapp.views as mainapp
 urlpatterns = [
     path('', mainapp.main),
     path('admin/', admin.site.urls),
-    path('tags/', include('tagapp.urls', namespace='tags'))
+    path('tags/', include('tagapp.urls', namespace='tags')),
+    # path('auth/', include('auth.urls', namespace='auth')),
+    path('search/', include('search.urls', namespace='django_select2')),
+    path('project/', include('projectapp.urls', namespace='project')),
 ]
 
 if settings.DEBUG:

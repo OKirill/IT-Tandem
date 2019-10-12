@@ -33,11 +33,11 @@ class TagCreateMixin(FormView):
         return kwargs
 
 
-class SkillCreate(TagCreateMixin):
-
+class SkillCreate(FormView):
+    template_name = 'tagapp/form.html'
     success_url = '/tags/skill/'
-    model_tag = Skill
-    form_class_tag = TagForm
+    # model_tag = Skill
+    # form_class_tag = TagForm
 
 
 class DesireCreate(TagCreateMixin):
@@ -45,7 +45,6 @@ class DesireCreate(TagCreateMixin):
     success_url = '/tags/desire/'
     model_tag = Desire
     form_class_tag = TagForm
-
 
 
 

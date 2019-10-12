@@ -1,0 +1,22 @@
+{% extends 'mainapp/base.html' %}
+{% load i18n %}
+{% block content %}
+
+ <div>
+
+
+        <p>{{ project.name }}</p>
+        <p>{{ project.desc }}</p>
+        {% for tag in project.tags.all %}
+            <p>Название: {{ tag.name }}</p>
+            <p>Описание: {{ tag.desc }}</p>
+        {% endfor %}
+         {% if request.user.id == project.owner.id %}
+            <a href="{% url 'project:ProjectUpdate' project.id %}" >{% trans 'Редактировать' %} </a>
+            <a href="{% url 'project:ProjectDelete' project.id %}" >{% trans 'Удалить' %} </a>
+        {% endif %}
+ </div>
+
+
+
+{% endblock %}

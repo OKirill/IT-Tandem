@@ -16,4 +16,5 @@ class UserForm(UserCreationForm, PasswordResetForm):
 class TagForm(forms.Form):
 
     name = forms.ModelMultipleChoiceField(label='фронтенд', queryset=Tag.objects.all(), widget=Select2MultipleWidget)
-    # name1 = forms.ModelMultipleChoiceField(label='бэкенд', queryset=Tag.objects.all(), widget=Select2MultipleWidget)
+
+
