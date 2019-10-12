@@ -21,23 +21,24 @@ class TagCreateMixin(FormView):
             self.model_tag.objects.filter(user=self.request.user).delete()
             for skill in form.cleaned_data['name']:
                 self.model_tag.objects.create(tag_id=skill.id, user=self.request.user)
-                messages.success(self.request, _(f'Навыки сохранены'))
+            messages.success(self.request, _(f'Навыки сохранены'))
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         kwargs = super().get_context_data(**kwargs)
         skills = []
+        print()
         for skill in self.model_tag.objects.filter(user=self.request.user):
             skills.append(skill.tag_id)
         kwargs['form'] = self.form_class_tag(initial={'name': skills})
         return kwargs
 
 
-class SkillCreate(FormView):
+class SkillCreate(TagCreateMixin):
     template_name = 'tagapp/form.html'
     success_url = '/tags/skill/'
-    # model_tag = Skill
-    # form_class_tag = TagForm
+    model_tag = Skill
+    form_class_tag = TagForm
 
 
 class DesireCreate(TagCreateMixin):
