@@ -4,6 +4,8 @@ from django.core.mail import send_mail
 from authapp.forms import UserRegisterForm
 from authapp.forms import UserLoginForm
 from django.conf import settings
+from authapp.models import User
+from django.contrib import auth
 
 
 def login(request):
@@ -35,10 +37,10 @@ def register(request):
             user = register_form.save()
             if send_verify_mail(user):
                 print('сообщение подтверждения отправлено')
-                return HttpResponseRedirect(reverse('login'))
+                return HttpResponseRedirect(reverse('user:login'))
             else:
                 print('ошибка отправки сообщения')
-                return HttpResponseRedirect(reverse('login'))
+                return HttpResponseRedirect(reverse('user:login'))
     else:
         register_form = UserRegisterForm()
     context = {'title': 'регистрация',
@@ -46,8 +48,12 @@ def register(request):
                }
     return render(request, 'authapp/register.html', context)
 
+
+def edit(request):
+    return HttpResponseRedirect(reverse('main'))
+
 def send_verify_mail(user):
-    verify_link = reverse('auth:verify',
+    verify_link = reverse('user:verify',
                           args=[user.email, user.activation_key])
     title = f'Подтверждение учетной записи {user.username}'
     message = f'Для подтверждения учетной записи {user.username} на портале \
