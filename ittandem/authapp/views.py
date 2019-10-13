@@ -50,7 +50,19 @@ def register(request):
 
 
 def edit(request):
-    return HttpResponseRedirect(reverse('main'))
+    title = 'редактирование'
+
+    if request.method == 'POST':
+        edit_form = UserEditForm(request.POST, request.FILES, instance=request.user)
+        if edit_form.is_valid():
+            edit_form.save()
+            return HttpResponseRedirect(reverse('user:edit'))
+    else:
+        edit_form = ShopUserEditForm(instance=request.user)
+
+    content = {'title': title, 'edit_form': edit_form}
+
+    return render(request, 'authapp/edit.html', content)
 
 def send_verify_mail(user):
     verify_link = reverse('user:verify',
