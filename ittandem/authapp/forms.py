@@ -2,6 +2,7 @@ import random
 import hashlib
 from django.contrib.auth.forms import UserCreationForm
 from authapp.models import User
+from django.contrib.auth.forms import AuthenticationForm
 
 class UserRegisterForm(UserCreationForm):
     class Meta:
@@ -21,3 +22,14 @@ class UserRegisterForm(UserCreationForm):
         user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
         user.save()
         return user
+
+
+class UserLoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'password')
+
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
