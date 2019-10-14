@@ -1,6 +1,7 @@
 from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from authapp.models import User, Project
+from authapp.models import User
+from .models import Project
 from .forms import ValidPk, ValidSlug
 from django.views.generic import FormView
 from django.http import HttpResponseRedirect

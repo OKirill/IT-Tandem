@@ -2,8 +2,8 @@ from django import forms
 # from django.utils.translation import gettext_lazy as _
 # from django.urls import reverse_lazy
 from authapp.models import User
-from mainapp.models import Tag
-from authapp.models import Project
+from tagapp.models import Stack
+from .models import Project
 from django.contrib.auth.forms import PasswordResetForm, UserCreationForm
 from django_select2.forms import Select2MultipleWidget
 from django.utils.translation import gettext_lazy as _
@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 class ProjectForm(forms.Form):
         title = forms.CharField(label=_('Назавание:'))
         desc = forms.CharField(label=_('Описание:'), widget=forms.Textarea())
-        tags = forms.ModelMultipleChoiceField(label='Стек заний', queryset=Tag.objects.all(), widget=Select2MultipleWidget)
+        tags = forms.ModelMultipleChoiceField(label='Стек заний', queryset=Stack.objects.all(), widget=Select2MultipleWidget)
 
 
 class ValidPk(forms.Form):

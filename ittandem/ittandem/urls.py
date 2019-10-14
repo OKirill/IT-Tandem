@@ -24,8 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tags/', include('tagapp.urls', namespace='tags')),
     # path('auth/', include('auth.urls', namespace='auth')),
-    path('search/', include('search.urls', namespace='django_select2')),
     path('project/', include('projectapp.urls', namespace='project')),
+    path('select2/', include('django_select2.urls', namespace='django_select2')),
 ]
 
 if settings.DEBUG:

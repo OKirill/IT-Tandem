@@ -1,20 +1,51 @@
 from django import forms
 # from django.utils.translation import gettext_lazy as _
 # from django.urls import reverse_lazy
-from authapp.models import User
-from mainapp.models import Tag
-from django.contrib.auth.forms import PasswordResetForm, UserCreationForm
-from django_select2.forms import Select2MultipleWidget
+# from authapp.models import User
+from .models import Field, Stack
+from django_select2.forms import Select2MultipleWidget, ModelSelect2Widget
 
-
-class UserForm(UserCreationForm, PasswordResetForm):
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+NUMBER_CHOICES = [
+    # (1, 'One'),
+    # (2, 'Two'),
+    # (3, 'Three'),
+    # (4, 'Four'),
+]
+for field in Field.objects.all():
+    stacks = Stack.objects.filter(field=field)
+    for stack in stacks:
+        title = field.name + '/' + stack.name
+        NUMBER_CHOICES.append((stack.id, title))
 
 
 class TagForm(forms.Form):
 
-    name = forms.ModelMultipleChoiceField(label='фронтенд', queryset=Tag.objects.all(), widget=Select2MultipleWidget)
+    name = forms.MultipleChoiceField(label='Навыки', choices=NUMBER_CHOICES, widget=Select2MultipleWidget)
 
 
+class SearchForm(forms.Form):
+    method = 'GET'
+
+    field = forms.ModelChoiceField(
+        queryset=Field.objects.all(),
+        label='Направление',
+        widget=ModelSelect2Widget(
+            search_fields=['name__icontains'],
+            max_results=500,
+            attrs={'data-minimum-input-length': 0,
+                   'onchange': '$("#id_stack").empty();'},
+        ),
+        required=False
+    )
+
+    stack = forms.ModelChoiceField(
+        queryset=Stack.objects.all(),
+        label='Стэк',
+        widget=ModelSelect2Widget(
+            search_fields=['name__icontains'],
+            dependent_fields={'field': 'field'},
+            max_results=500,
+            attrs={'data-minimum-input-length': 0},
+        ),
+        required=False
+    )

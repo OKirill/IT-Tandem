@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'authapp',
     'django_select2',
     'tagapp',
-    'search',
+    #'search',
     'projectapp'
 ]
 
