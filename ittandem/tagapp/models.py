@@ -1,18 +1,27 @@
 from django.db import models
 from authapp.models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class Field(models.Model):
-    name = models.CharField(max_length=255)
-
     class Meta:
-        ordering = ('name',)
+        ordering = ('name', )
+        verbose_name = _('Направление')
+        verbose_name_plural = _('Направления(заполняет админ)')
+
+    name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
 
 
 class Stack(models.Model):
+
+    class Meta:
+        ordering = ('name', )
+        verbose_name = _('Навык')
+        verbose_name_plural = _('Навыки(заполняет админ)')
+
     name = models.CharField(max_length=255)
     desc = models.TextField(verbose_name='Описание тега', blank=True)
     field = models.ForeignKey('Field', related_name="fields", on_delete=models.CASCADE)
@@ -22,6 +31,11 @@ class Stack(models.Model):
 
 
 class Skill(models.Model):
+    class Meta:
+        ordering = ('user', )
+        verbose_name = _('Умение user')
+        verbose_name_plural = _('Умения user')
+
     user = models.ForeignKey(User, related_name='skills', on_delete=models.CASCADE)
     tag = models.ForeignKey(Stack, related_name='able', on_delete=models.CASCADE)
 

@@ -82,11 +82,11 @@ class SearchView(ListView):
                         field = '%'
             object_raw = User.objects.raw(
                 '''select distinct * 
-        from authapp_user
-        left join tagapp_skill on authapp_user.id=tagapp_skill.user_id
-        left join tagapp_stack on tagapp_skill.tag_id=tagapp_stack.id
-        left join tagapp_field on tagapp_stack.field_id=tagapp_field.id
-        where tagapp_field.id LIKE  %s or tagapp_stack.id LIKE  %s''', [field, stack])
+                    from authapp_user
+                    left join tagapp_skill on authapp_user.id=tagapp_skill.user_id
+                    left join tagapp_stack on tagapp_skill.tag_id=tagapp_stack.id
+                    left join tagapp_field on tagapp_stack.field_id=tagapp_field.id
+                    where tagapp_field.id LIKE  %s or tagapp_stack.id LIKE  %s''', [field, stack])
             user_dict = {}
             for user in object_raw:
                 skills = Skill.objects.filter(user=user)
