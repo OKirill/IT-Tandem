@@ -1,0 +1,13 @@
+{% extends 'mainapp/base.html' %}
+{% load i18n %}
+{% block content %}
+
+ <div>
+     {% for project in object_list %}
+     <p><a href="{% url 'project:ProjectDetail' project.id %}" >{{ project.name }}</a></p>
+     {% endfor %}
+ </div>
+
+
+
+{% endblock %}

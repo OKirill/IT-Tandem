@@ -1,0 +1,26 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+{{ form.media.css }}
+<style type="text/css">
+    select {
+      width: 200px;
+    }
+
+</style>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <table>{{ form.as_table }}</table>
+
+    <input type="submit" value="Сохранить"/>
+</form>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+  window.onerror = function (msg) {
+    $("body").attr("JSError", msg);
+  }
+
+</script>
+{{ form.media.js }}
+{% endblock content %}

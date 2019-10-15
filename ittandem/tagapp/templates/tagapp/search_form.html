@@ -1,0 +1,36 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+{{ form.media.css }}
+<style type="text/css">
+    select {
+      width: 200px;
+    }
+
+</style>
+
+<form method="get" action="">
+
+    {{ form }}
+    <input type="submit" value="ПОИСК"/>
+</form>
+
+<div class="user_list">
+    {% for key, value in object_list.items %}
+        <p>{{ key.username }}-{{ key.id }}</p>
+        {% for skill in value %}
+            <p>{{ skill }}</p>
+        {% endfor %}
+    {% endfor %}
+
+</div>
+
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+  window.onerror = function (msg) {
+    $("body").attr("JSError", msg);
+  }
+
+</script>
+{{ form.media.js }}
+{% endblock content %}
