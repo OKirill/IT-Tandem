@@ -70,4 +70,13 @@
     </div> <!-- card.// -->
 
 </div>
+
+    <form class="form-horizontal" action="{% url 'authapp:register' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ register_form.as_p }}
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"> Создать аккаунт</button>
+        </div>
+    </form>
 {% endblock %}

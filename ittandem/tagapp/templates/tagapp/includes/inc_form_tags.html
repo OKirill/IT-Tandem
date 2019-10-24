@@ -1,0 +1,16 @@
+{% if actions == 1 %}
+<h2>{{ label_text }}</h2>
+<form method="post" action="{% url 'tags:SkillCreate' %}">
+{% else %}
+    {% if actions == 2 %}
+    <h2>{{ label_text }}</h2>
+    <form method="post" action="{% url 'tags:DesireCreate' %}">
+        {% else %}
+        <form method="post" action="">
+            {% endif %}
+{% endif %}
+    {% csrf_token %}
+
+    {{ form }}
+    <input type="submit" value="Сохранить"/>
+</form>

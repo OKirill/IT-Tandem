@@ -21,11 +21,11 @@ import mainapp.views as mainapp
 
 urlpatterns = [
     path('', include('mainapp.urls', namespace='main')),
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     # path('tags/', include('tagapp.urls', namespace='tags')),
-    path('authapp/', include('authapp.urls', namespace='authapp')),
-    path('project/', include('projectapp.urls', namespace='project')),
-    path('select2/', include('django_select2.urls', namespace='django_select2')),
+    # path('authapp/', include('authapp.urls', namespace='authapp')),
+    # path('project/', include('projectapp.urls', namespace='project')),
+    # path('select2/', include('django_select2.urls', namespace='django_select2')),
 ]
 
 if settings.DEBUG:

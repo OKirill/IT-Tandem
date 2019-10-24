@@ -17,7 +17,7 @@
 
 <div class="user_list">
     {% for key, value in object_list.items %}
-        <p>{{ key.username }}-{{ key.id }}</p>
+        <a href="{% url 'authapp:profile' key.id %}">{{ key.username }}</a>
         {% for skill in value %}
             <p>{{ skill }}</p>
         {% endfor %}

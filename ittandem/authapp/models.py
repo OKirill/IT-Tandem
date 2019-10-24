@@ -13,3 +13,8 @@ class Contact(models.Model):
     link = models.TextField()
 
 
+class Deal(models.Model):
+
+    user = models.ForeignKey(User, related_name='user1', on_delete=models.CASCADE, verbose_name='Юзер')
+    partner = models.ForeignKey(User, related_name='user2', on_delete=models.CASCADE, verbose_name='Партнер')
+    status = models.BooleanField(default=False)

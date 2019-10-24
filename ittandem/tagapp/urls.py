@@ -9,6 +9,6 @@ urlpatterns = [
 
     path('skill/', SkillCreate.as_view(form_class=TagForm), name='SkillCreate'),
     path('desire/', DesireCreate.as_view(form_class=TagForm), name='DesireCreate'),
-    path('search/',  SearchView.as_view(), name='DesireCreate')
+    path('search/',  SearchView.as_view(), name='search')
 
 ]

@@ -1,0 +1,17 @@
+{{ form.media.css }}
+<style type="text/css">
+    select {
+      width: 400px;
+    }
+
+</style>
+{% include 'tagapp/includes/inc_form_tags.html' with form=form actions=1 label_text="Мои умения" %}
+{% include 'tagapp/includes/inc_form_tags.html' with form=form2 actions=2 label_text="Хочу изучать" %}
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+  window.onerror = function (msg) {
+    $("body").attr("JSError", msg);
+  }
+
+</script>
+{{ form.media.js }}

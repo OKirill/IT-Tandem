@@ -8,6 +8,8 @@ from .forms import TagForm, SearchForm
 # from django.forms.models import inlineformset_factory
 from tagapp.models import Skill, Desire, Stack
 # from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 
 class TagCreateMixin(FormView):
@@ -16,15 +18,17 @@ class TagCreateMixin(FormView):
     model_tag = None
     form_class_tag = None
 
+    def get(self, request):
+        return HttpResponseRedirect('/')
+
     def form_valid(self, form):
-        print(form.cleaned_data)
         if self.request.user.id:
             self.model_tag.objects.filter(user=self.request.user).delete()
             for skill in form.cleaned_data['name']:
                 skill = int(skill)
                 self.model_tag.objects.create(tag_id=skill, user=self.request.user)
             messages.success(self.request, _(f'Навыки сохранены'))
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
 
     def get_context_data(self, **kwargs):
         kwargs = super().get_context_data(**kwargs)
@@ -35,6 +39,9 @@ class TagCreateMixin(FormView):
         kwargs['form'] = self.form_class_tag(initial={'name': skills})
         return kwargs
 
+    def redirect_view(self):
+        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
+
 
 class SkillCreate(TagCreateMixin):
     template_name = 'tagapp/form.html'
@@ -44,7 +51,7 @@ class SkillCreate(TagCreateMixin):
 
 
 class DesireCreate(TagCreateMixin):
-
+    template_name = 'tagapp/form.html'
     success_url = '/tags/desire/'
     model_tag = Desire
     form_class_tag = TagForm
@@ -76,10 +83,12 @@ class SearchView(ListView):
                     if 'field' in self.request.GET:
                         field = self.request.GET['field']
                     if 'stack' in self.request.GET:
-                        stack = self.request.GET['stack']
-                        field = ''
+                        if self.request.GET['stack'] != '':
+                            stack = self.request.GET['stack']
+                            field = ''
                     if stack == '' and field == '':
                         field = '%'
+                    print('field=', field, 'stack=', stack)
             object_raw = User.objects.raw(
                 '''select distinct * 
                     from authapp_user

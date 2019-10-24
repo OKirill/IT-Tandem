@@ -1,60 +1,79 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-3 d-flex flex-column justify-content-center">-->
-<!--                <div class="user-avatar">-->
-<!--                    <img src="{% if user.avatar %}-->
-<!--                        /media/{{ user.avatar }}-->
-<!--                        {% else %}-->
-<!--                            https://im0-tub-ru.yandex.net/i?id=4623c59b0da60739693b1c3e7d21799a-l&n=13x-->
-<!--                    {% endif %}"-->
-<!--                         alt="user-avatar"-->
-<!--                         class="rounded-2">-->
-<!--                </div>-->
-<!--                <a href="#" class="btn btn-danger">Обменяться контактами</a>-->
+    {% if object.id != request.user.id %}
+    <div class="container">
+        <div class="row">
+            <div class="col-3 d-flex flex-column justify-content-center">
+                <div class="user-avatar">
+                    <img src="{% if user.avatar %}
+                        {{ user.avatar.url }}
+                        {% else %}
+                            https://im0-tub-ru.yandex.net/i?id=4623c59b0da60739693b1c3e7d21799a-l&n=13x
+                    {% endif %}"
+                         alt="user-avatar"
+                         class="rounded-2">
+                </div>
+                <div class="deal">
+                    <form method="post" action="{% url 'authapp:deal' object.id %}">
+                    {% csrf_token %}
+                        {% if button_style == 'add' %}
+                            <button class="btn btn-danger" type="submit" name="add" value="add">Обменяться контактами</button>
+                        {% endif %}
+                        {% if button_style == 'confirm' %}
+                            <button class="btn btn-danger" type="submit" name="confirm" value="confirm">Подтвердить</button>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="contact">
+                    {% if contact_view %}
+                     <p>Контакты видны</p>
+                    {% else %}
+                        <p>Контакты не видны, дождитесь подтверждения</p>
+                    {% endif %}
+                </div>
 
-<!--            </div>-->
-<!--            <div class="col-9">-->
-<!--                <ul class="nav nav-tabs profile-nav">-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link active" href="#">Профиль</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#">Проекты</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#">Контакты</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                <div class="profile-data">-->
-<!--                    <div class="profile-name">{{ user.username }}</div>-->
-<!--                    <p class="profile-fullname">{{ user.first_name }} {{ user.last_name }}</p>-->
-<!--                    <p class="profile-text">{{ user.about_me }}</p>-->
-<!--                    <div class="profile-tags">-->
-<!--                        Навыки:-->
-<!--                        <ul class="list-inline">-->
-<!--                            <li class="list-inline-item"><span class="badge badge-warning">JavaScript</span></li>-->
-<!--                            <li class="list-inline-item"><span class="badge badge-warning">ReactJS</span></li>-->
-<!--                            <li class="list-inline-item"><span class="badge badge-warning">TypeScript</span></li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                    <div class="profile-tags">-->
-<!--                        Цели:-->
-<!--                        <ul class="list-inline">-->
-<!--                            <li class="list-inline-item"><span class="badge badge-warning">Java</span></li>-->
-<!--                            <li class="list-inline-item"><span class="badge badge-warning">opensource</span></li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                    <p class="profile-tags"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+            </div>
+            <div class="col-9">
+                <ul class="nav nav-tabs profile-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Профиль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Контакты</a>
+                    </li>
+                </ul>
+                <div class="profile-data">
+                    <div class="profile-name">{{ user.username }}</div>
+                    <p class="profile-fullname">{{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="profile-text">{{ user.about_me }}</p>
+                    <div class="profile-tags">
+                        Навыки:
+                        <ul class="list-inline">
+                            {% for skill in field_skill %}
+                            <li class="list-inline-item"><span class="badge badge-warning">{{ skill }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="profile-tags">
+                        Цели:
+                        <ul class="list-inline">
+                            {% for desire in field_desire %}
+                            <li class="list-inline-item"><span class="badge badge-warning">{{ desire }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <p class="profile-tags"></p>
+                </div>
+            </div>
+        </div>
 
 
-<!--    </div>-->
-<div class="container bootstrap snippet">
+    </div>
+    {% else %}
     <div class="row">
         <div class="col-sm-12">
             <h1>Имя пользователя</h1>
@@ -417,11 +436,26 @@
                 </div>
 
             </div>
+
+            {% include 'tagapp/includes/form_style_profile.html' with  form=form_skill form2=form_desire %}
+            {% if user_bids %}
+            <div class="bids">
+
+                <h2>Заявки:</h2>
+                {% for bid in user_bids %}
+                <a href="{% url 'authapp:profile' bid.user.id %}">{{ bid.user }}</a>
+                <form method="post" action="{% url 'authapp:deal' bid.user.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit" name="confirm" value="confirm">Подтвердить</button>
+                </form>
+                {% endfor %}
+            </div>
+            {% endif %}
             <!--/tab-pane-->
         </div>
         <!--/tab-content-->
 
     </div>
     <!--/col-9-->
-</div>
+    {% endif %}
 {% endblock %}
