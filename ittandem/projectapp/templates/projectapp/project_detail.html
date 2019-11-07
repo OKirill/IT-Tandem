@@ -4,12 +4,19 @@
 
  <div>
 
-
+        <h5>Название проекта:</h5>
+     <br>
         <p>{{ project.name }}</p>
-        <p>Описание: {{ project.desc }}</p>
+        <hr>
+        <p style="font-weight: bold">Описание:</p>
+            <p>
+                {{ project.desc }}
+            </p>
+        <hr>
         <p>Технологии: </p>
         {% for tag in project.tags.all %}
             <p>{{ tag.name }}</p>
+            <hr>
 
         {% endfor %}
          {% if request.user.id == project.owner.id %}
