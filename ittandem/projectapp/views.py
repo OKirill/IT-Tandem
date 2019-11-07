@@ -76,8 +76,8 @@ class ProjectUpdate(SuccessMessageMixin, ProjectGetMixin, LoginRequiredMixin, Up
     success_url = reverse_lazy('project:ProjectView')
     model = Project
     template_name = 'projectapp/formcreate.html'
-    fields = ['name', 'desc', 'tags']
-    success_message = _('Проукт изменен')
+    fields = ['name', 'short_desc', 'desc', 'tags']
+    success_message = _('Проект изменен')
 
 
 class ProjectDetail(DetailView):

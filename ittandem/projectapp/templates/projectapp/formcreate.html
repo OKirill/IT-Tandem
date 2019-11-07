@@ -1,26 +1,38 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% endblock %}
 {% block content %}
-{{ form.media.css }}
-<style type="text/css">
-    select {
-      width: 200px;
-    }
+    {{ form.media.css }}
+    <style type="text/css">
+        select {
+            width: 200px;
+        }
 
-</style>
+    </style>
 
-<form method="post" action="">
-    {% csrf_token %}
-    <table>{{ form.as_table }}</table>
 
-    <input type="submit" value="Сохранить"/>
-</form>
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
-  window.onerror = function (msg) {
-    $("body").attr("JSError", msg);
-  }
+    <div class="container">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
 
-</script>
-{{ form.media.js }}
+                <form class="form-horizontal" method="post" action="">
+                    {% csrf_token %}
+                    <table>{{ form.as_p }}</table>
+
+                    <input class="btn btn-lg btn-secondary" style="border: 1px solid #8adba0;border-radius: 5px; width: 140px;height: 55px;" type="submit" value="Сохранить"/>
+                </form>
+            </article>
+        </div>
+    </div>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        window.onerror = function (msg) {
+            $("body").attr("JSError", msg);
+        }
+
+    </script>
+    {{ form.media.js }}
 {% endblock content %}

@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 class ProjectForm(forms.Form):
         title = forms.CharField(label=_('Назавание:'))
+        short_desc = forms.CharField(label=_('Краткое Описание:'), widget=forms.Textarea())
         desc = forms.CharField(label=_('Описание:'), widget=forms.Textarea())
         tags = forms.ModelMultipleChoiceField(label='Стек заний', queryset=Stack.objects.all(), widget=Select2MultipleWidget)
 
