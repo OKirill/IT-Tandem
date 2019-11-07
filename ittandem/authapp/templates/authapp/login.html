@@ -13,20 +13,20 @@
 
         <!-- Icon -->
         <div class="fadeIn first">
-            <i class="fa fa-user" style="font-size: 25px; margin-top: 10px;"></i>
+            <i class="fa fa-user" style="   font-size: 25px; margin-top: 10px;"></i>
         </div>
 
         <!-- Login Form -->
-        <form action="{% url 'authapp:login' %}" method="post">
+        <form style="margin-left: 30px;width: 400px;" action="{% url 'authapp:login' %}" method="post">
             {% csrf_token %}
             {{ login_form.as_p}}
             <input type="submit" class="fadeIn" value="Log In">
         </form>
 
         <!-- Remind Passowrd -->
-        <div id="formFooter">
-            <a class="underlineHover" href="#">Забыли пароль?</a>
-        </div>
+{#        <div id="formFooter">#}
+{#            <a class="underlineHover" href="#">Забыли пароль?</a>#}
+{#        </div>#}
 
     </div>
 </div>
