@@ -6,12 +6,15 @@
 
 </style>
 {% include 'tagapp/includes/inc_form_tags.html' with form=form actions=1 label_text="Мои умения" %}
-{% include 'tagapp/includes/inc_form_tags.html' with form=form2 actions=2 label_text="Хочу изучать" %}
+
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
   window.onerror = function (msg) {
     $("body").attr("JSError", msg);
   }
+  if(!!window.performance && window.performance.navigation.type == 2) {
+    window.location.reload();
+    }
 
 </script>
 {{ form.media.js }}

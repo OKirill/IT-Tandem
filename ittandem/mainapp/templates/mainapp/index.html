@@ -4,29 +4,29 @@
     <title>IT-Tandem</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/animate.css">
-    
-    <link rel="stylesheet" href="static/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="static/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="static/css/magnific-popup.css">
+    <link rel="stylesheet" href="/static/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
 
-    <link rel="stylesheet" href="static/css/aos.css">
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/css/magnific-popup.css">
 
-    <link rel="stylesheet" href="static/css/ionicons.min.css">
+    <link rel="stylesheet" href="/static/css/aos.css">
 
-    <link rel="stylesheet" href="static/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="static/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
 
-    
-    <link rel="stylesheet" href="static/css/flaticon.css">
-    <link rel="stylesheet" href="static/css/icomoon.css">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/static/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="/static/css/flaticon.css">
+    <link rel="stylesheet" href="/static/css/icomoon.css">
+    <link rel="stylesheet" href="/static/css/style.css">
   </head>
   <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" data-aos="fade-down" data-aos-delay="500">
       <div class="container">
         <a class="navbar-brand" href="{% url 'main:index' %}">IT-Tandem</a>
@@ -37,17 +37,17 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active"><a href="{% url 'main:index' %}" class="nav-link">Главная</a></li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'authapp:edit' %}">
-                    {{ user.first_name|default:'Пользователь' }}
-                </a>
-            </li>
-            {% endif %}
+<!--            {% if user.is_authenticated %}-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="{% url 'authapp:edit' %}">-->
+<!--                    {{ user.first_name|default:'Пользователь' }}-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {% endif %}-->
               <li class="nav-item">
                 {% if user.is_authenticated %}
                   <a class="nav-link" href="{% url 'authapp:logout' %}">Выйти</a>
-                  <li class="nav-item"><a href="{% url 'tags:search' %}" class="nav-link">Поиск</a></li>
+                  <li class="nav-item"><a href="{% url 'tags:search_skill' %}" class="nav-link">Поиск</a></li>
                 {% else %}
                   <a class="nav-link" href="{% url 'authapp:login' %}">Войти</a>
                   <li class="nav-item"><a href="{% url 'authapp:register' %}" class="nav-link">Регистрация</a></li>
@@ -57,8 +57,10 @@
 
 <!--            <li class="nav-item"><a href="about.html" class="nav-link">О проекте</a></li>-->
             {% if request.user.id %}
-            <li class="nav-item"><a href="{% url 'authapp:profile' request.user.id %}" class="nav-link">Личный кабинет</a></li>
+            <li class="nav-item"><a href="{% url 'authapp:profile' request.user.id %}" class="nav-link">Личный кабинет ({{ user.first_name|default:'Пользователь' }})</a></li>
+
             {% endif %}
+
 <!--            <li class="nav-item"><a href="contact.html" class="nav-link">Контакты</a></li>-->
           </ul>
         </div>
@@ -72,21 +74,21 @@
           <div class="col-md-7">
             <h1 class="ftco-heading mb-3" data-aos="fade-up" data-aos-delay="500">Изучайте языки программирования с нами</h1>
             <h2 class="h5 ftco-subheading mb-5" data-aos="fade-up"  data-aos-delay="600">Начните изучать <span id="lang"></span> с профессионалами уже сейчас.</h2>
-            <p data-aos="fade-up"  data-aos-delay="700"><a href="{% url 'tags:search'%}" target="_blank" class="btn btn-outline-white px-4 py-3"  data-target="#reservationModal">Найти партнёра</a></p>
+            <p data-aos="fade-up"  data-aos-delay="700"><a href="{% url 'tags:search_skill'%}" target="_blank" class="btn btn-outline-white px-4 py-3"  data-target="#reservationModal">Найти партнёра</a></p>
           </div>
         </div>
       </div>
     </section>
     <!-- END section -->
-    
+
     <section class="ftco-section" id="section-about">
       <div class="container">
         <div class="row">
           <div class="col-md-12  mb-5" data-aos="fade-up">
-            <h1 class="ftco-heading heading-thin mb-5">For busy business professionals &mdash; A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. </h1>
+            <h1 class="ftco-heading heading-thin mb-5">Обучение в Тандеме - Это легко. Найдите уже сегодня подходящего для вас партнера и окунитесь в мир новых знаний! </h1>
           </div>
         </div>
-        
+
       </div>
     </section>
     <!-- END section -->
@@ -98,11 +100,11 @@
           </div>
           <div class="text col-md-6 col-lg-7 d-flex">
             <div class="text-inner align-self-center" data-aos="fade-up">
-              
-              <h3>Far far away, behind the word mountains</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+              <h3>Лучшее время, что бы начать - Сейчас!</h3>
+              <p>Хотите подтянуть знания по фреймворку или выучить с нуля новый язык? Вы оказались в правильном месте! У нас вы сможете без проблем найти человека под любой ваш запрос!</p>
+
+              <p>Просто зарегистрируйтесь и начните поиск партнера прямо сегодня! И самое главное люди будут делиться с вами знаниями на бесплатной основе. На нашей платформе нет никакой валюты кроме ваших знаний которые вы можете предложить взамен!</p>
             </div>
           </div>
         </div>
@@ -112,29 +114,29 @@
     <section class="section-2-blocks-wrapper-2">
       <div class="container-fluid">
         <div class="section-2-blocks-wrapper row no-gutters d-flex" style="background: #fafafa;">
-          
+
           <div class="text col-md-5 col-lg-5 col-xl-4 ml-auto d-flex" data-aos="fade-up">
             <div class="text-inner align-self-center mr-auto">
-              <h4 class="text-primary h5">Far far away, behind the word mountains</h4>
-              <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-              <h4 class="text-primary h5">A small river named Duden flows by their place</h4>
-              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+              <h4 class="text-primary h5">Пользовательские проекты</h4>
+              <p class="mb-4">Возможно вас не интересуют новые навыки, а вы хотите найти партнера для совместного проекта? Тогда вы снова в правильном месте - найдите проект который вам по душе или создайте свой собственный и вперёд на встречу к вашему первому стартапу!</p>
+              <h4 class="text-primary h5">Нет лучше способа закрепить материал, чем сделать что-то реально работающее</h4>
+              <p class="mb-4">Объединитесь с вашим партнером и начните работать над реальным проектом. От теории к практике!</p>
             </div>
           </div>
           <div class="img col-md-5 no-gutters ml-auto">
             <div class="image" style="background-image: url('static/img/image_5.jpg'); " data-aos="fade-left"></div>
             <div class="quote" data-aos="fade-left">
-              <p class="mb-5">&rdquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. &ldquo;</p>
+              <p class="mb-5">&rdquo;У меня очень плавающий график и мне всегда было сложно найти подходящие по времени онлайн-курсы, но с IT-Tandem, я смогла найти людей с похожей проблемой, и без проблем составить график который бы нас устраивал&ldquo;</p>
               <p class="author">&mdash; Mellissa Clark</p>
             </div>
           </div>
         </div>
       </div>
-      
+
     </section>
 
-    
-  
+
+
 
 <!--  <div class="ftco-section">-->
 <!--    <div class="container">-->
@@ -297,7 +299,7 @@
     <div class="container">
       <div class="row justify-content-center mb-5 pb-5">
         <div class="col-md-7 text-center"  data-aos="fade-up">
-          <h2>Our Blog</h2>
+          <h2>Наш Блог</h2>
         </div>
       </div>
 
@@ -343,7 +345,7 @@
     </div>
   </div>
 
-  
+
   <footer class="ftco-footer ftco-bg-dark ftco-section">
     <div class="container">
       <div class="row mb-5">
@@ -424,6 +426,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script src="static/js/google-map.js"></script>
   <script src="static/js/t-writer.js"></script>
   <script src="static/js/main.js"></script>
-    
+
   </body>
 </html>

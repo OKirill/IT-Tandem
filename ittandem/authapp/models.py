@@ -6,6 +6,7 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='user_avatars', blank=True, verbose_name='Аватар')
     about_me = models.TextField(max_length=512, blank=True, verbose_name='О себе')
     status = models.CharField(max_length=10, verbose_name='Статус пользователя', blank=True)
+    link = models.TextField(max_length=46, verbose_name='Ссылка на соцсеть', blank=True)
 
 
 class Contact(models.Model):

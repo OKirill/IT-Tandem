@@ -11,6 +11,13 @@ from django.contrib import auth
 from django.urls import reverse
 from authapp.forms import UserRegisterForm
 from authapp.forms import UserEditForm
+from projectapp.views import ListView
+from projectapp.models import Project
+from projectapp.views import ProjectList
+from projectapp.views import ProjectDetail
+
+
+
 
 
 class DealUpdate(LoginRequiredMixin, View):
@@ -18,7 +25,6 @@ class DealUpdate(LoginRequiredMixin, View):
     model = Deal
 
     def post(self, request, *args, **kwargs):
-        print('id', kwargs['pk'], self.request.POST.get('add'))
         if self.request.POST.get('add'):
             self.model.objects.create(user=self.request.user, partner=get_object_or_404(User, pk=kwargs['pk']))
 
@@ -54,14 +60,14 @@ class UserProfile(LoginRequiredMixin, DetailView):
 
         else:
             field_skill = []
-            skills = self.request.user.skills.all()
+            skills = self.model_tag_skill.objects.filter(user_id=self.kwargs['pk'])
             for skill in skills:
-                title = skill.tag.field.name + '/' + skill.tag.name
+                title = skill.tag.name
                 field_skill.append(title)
             field_desire = []
-            desires = self.request.user.desires.all()
+            desires = self.model_tag_desire.objects.filter(user_id=self.kwargs['pk'])
             for desire in desires:
-                title = desire.tag.field.name + '/' + desire.tag.name
+                title = desire.tag.name
                 field_desire.append(title)
 
             button_style = ''
@@ -79,7 +85,6 @@ class UserProfile(LoginRequiredMixin, DetailView):
                 contact_view = find2.first().status
                 if not contact_view:
                     button_style = 'confirm'
-
 
 
             kwargs['button_style'] = button_style
@@ -146,5 +151,3 @@ def edit(request):
     context = {'title': title, 'edit_form': edit_form}
 
     return render(request, 'authapp/edit.html', context)
-
-

@@ -2,12 +2,31 @@
 {% load i18n %}
 {% block content %}
 
- <div>
-     {% for project in object_list %}
-     <p><a href="{% url 'project:ProjectDetail' project.id %}" >{{ project.name }}</a></p>
-     {% endfor %}
- </div>
+<div>
+    {% for project in object_list %}
+    <div class="user_result"
+         style="border: 1px solid #34b38a; margin-top: 5px; border-radius: 10px;width: 550px;margin-left: 250px;display: flex;flex-direction: column">
+        <div style="margin-left: 10px;">
+            <h3><a href="{% url 'project:ProjectDetail' project.id %}">{{ project.name }}</a></h3>
+            <hr>
+            <h4>Описание проекта:</h4>
+            <p>{{ project.desc }}</p>
+            <hr>
+            <h5><strong>Используемые технологии:</strong></h5>
+            {% for tag in project.tags.all %}
+            <p style="color:steelblue">{{ tag.name }}</p>
+            <hr>
 
+            {% endfor %}
+
+            <h5>Автор Проекта:</h5>
+            <p><a href="{% url 'authapp:profile' project.owner.id %}">{{ project.owner|title }}</a></p>
+            <hr>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 
 {% endblock %}

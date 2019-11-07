@@ -1,5 +1,9 @@
 {% extends 'mainapp/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="card bg-light">
@@ -13,70 +17,18 @@
             <p class="divider-text">
                 <span class="bg-light">Или</span>
             </p>
-            <form>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <input name="" class="form-control" placeholder="Ваше имя" type="text">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                    </div>
-                    <input name="" class="form-control" placeholder="Email адрес" type="email">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-                    </div>
-                    <select class="custom-select" style="max-width: 120px; height: ">
-                        <option selected="">+7</option>
-                        <option value="1">+79</option>
-                        <option value="2">+78</option>
-                        <option value="3">+70</option>
-                    </select>
-                    <input name="" class="form-control" placeholder="Телефонный номер" type="text">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-building"></i> </span>
-                    </div>
-                    <select class="form-control">
-                        <option selected="" disabled hidden> Выберите язык</option>
-                        <option>JavaScript</option>
-                        <option>Go</option>
-                        <option>C#</option>
-                    </select>
-                </div> <!-- form-group end.// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Создайте пароль" type="password">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Повторите пароль" type="password">
-                </div> <!-- form-group// -->
+            <form class="form-horizontal" action="{% url 'authapp:register' %}" method="post"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ register_form.as_p }}
+                <br>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Создать аккаунт</button>
-                </div> <!-- form-group// -->
-                <p class="text-center">Уже есть аккаунт? <a href="login.html">Логин</a></p>
+                </div>
             </form>
         </article>
     </div> <!-- card.// -->
 
 </div>
 
-    <form class="form-horizontal" action="{% url 'authapp:register' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ register_form.as_p }}
-        <br>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"> Создать аккаунт</button>
-        </div>
-    </form>
 {% endblock %}

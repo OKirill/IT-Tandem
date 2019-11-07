@@ -3,18 +3,6 @@ from authapp.models import User
 from django.utils.translation import gettext_lazy as _
 
 
-class Field(models.Model):
-    class Meta:
-        ordering = ('name', )
-        verbose_name = _('Направление')
-        verbose_name_plural = _('Направления(заполняет админ)')
-
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
 class Stack(models.Model):
 
     class Meta:
@@ -24,7 +12,6 @@ class Stack(models.Model):
 
     name = models.CharField(max_length=255)
     desc = models.TextField(verbose_name='Описание тега', blank=True)
-    field = models.ForeignKey('Field', related_name="fields", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

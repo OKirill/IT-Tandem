@@ -13,13 +13,16 @@
     {% csrf_token %}
 
     {{ form }}
-    <input type="submit" value="Сохранить"/>
+    <button class="btn btn-lg btn-success" type="submit" >Сохранить</button>
 </form>
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
   window.onerror = function (msg) {
     $("body").attr("JSError", msg);
   }
+  if(!!window.performance && window.performance.navigation.type == 2) {
+    window.location.reload();
+    }
 
 </script>
 {{ form.media.js }}

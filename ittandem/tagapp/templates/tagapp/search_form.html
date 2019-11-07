@@ -1,36 +1,100 @@
 {% extends 'mainapp/base.html' %}
-{% load static %}
+{% load static i18n %}
 {% block content %}
 {{ form.media.css }}
+
 <style type="text/css">
     select {
-      width: 200px;
+      width: 400px;
     }
-
 </style>
 
-<form method="get" action="">
-
+<form method="get" action="" style="margin-left: 300px;">
     {{ form }}
-    <input type="submit" value="ПОИСК"/>
+    <button class="btn btn-lg btn-success" type="submit">{% trans 'ПОИСК' %}</button>
+    <a href="{% url 'project:ProjectView' %}" class="btn btn-lg btn-warning"><i
+                                    class="glyphicon glyphicon-ok-sign"></i>
+                                Список проектов
+                            </a>
 </form>
 
-<div class="user_list">
-    {% for key, value in object_list.items %}
-        <a href="{% url 'authapp:profile' key.id %}">{{ key.username }}</a>
-        {% for skill in value %}
-            <p>{{ skill }}</p>
-        {% endfor %}
-    {% endfor %}
+<div class="user_list" style="display: flex; margin-top: 100px;margin-right: 1300px;">
 
+{% for object in object_list %}
+
+    <div class="row" >
+      <div class="card-deck">
+        <div >
+          <div class="card" style="margin-right: 60px;">
+            <img src="{% if  object.avatar %}
+                        {{ object.avatar.url }}
+                        {% else %}
+                            https://im0-tub-ru.yandex.net/i?id=4623c59b0da60739693b1c3e7d21799a-l&n=13x
+                    {% endif %}"
+                         class="card-img-top" alt="Temp" style="height: 450px;width: 350px; border-bottom: 1px solid black ">
+            <div class="card-body">
+                <h5 class="card-title">Имя:</span> <a href="{% url 'authapp:profile' object.id %}">{{ object.username|title }}</a></h5>
+                <hr>
+              <p class="card-text">Знаю: {% for skill in object.skills.all %}<a href="{% url 'tagapp:search_skill' %}?stack={{ skill.tag.id }}">{{ skill.tag }} </a></p>
+                <hr>
+                {% endfor %}
+              {% if object.desires.all %}
+              <p class="card-text">Хочу знать:
+                {% for desire in object.desires.all %}<a href="{% url 'tagapp:search_desire' %}?stack={{ desire.tag.id }}">{{ desire.tag }} </a></p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endfor %}
 </div>
+<!--    {% for object in object_list %}-->
+<!--        <div class="user_result" style="border: 2px solid #34b38a; margin-top: 5px; border-radius: 10px;width: 620px;margin-left: 100px;display: flex">-->
+<!--            <img style="width: 200px; height: 100%; border-radius: 5px;" src="{% if  object.avatar %}-->
+<!--                        {{ object.avatar.url }}-->
+<!--                        {% else %}-->
+<!--                            https://im0-tub-ru.yandex.net/i?id=4623c59b0da60739693b1c3e7d21799a-l&n=13x-->
+<!--                    {% endif %}"-->
+<!--                         alt="user-avatar"-->
+<!--                         class="rounded-2">-->
+<!--            <br>-->
+<!--           <div class="user_text" style="text-align: left;margin-left: 20px; font-size: 18px">-->
+<!--               <p><span style="font-weight: bold">Имя:</span> <a href="{% url 'authapp:profile' object.id %}">{{ object.username|title }}</a></p>-->
+
+<!--            <p>Знаю: {% for skill in object.skills.all %}<a href="{% url 'tagapp:search_skill' %}?stack={{ skill.tag.id }}">{{ skill.tag }} </a></p>-->
+<!--            {% endfor %}-->
+<!--            {% if object.desires.all %}-->
+<!--                <p>Хочу знать:-->
+<!--                {% for desire in object.desires.all %}<a href="{% url 'tagapp:search_desire' %}?stack={{ desire.tag.id }}">{{ desire.tag }} </a></p>-->
+
+
+<!--                {% endfor %}-->
+
+<!--            {% endif %}-->
+
+<!--           </div>-->
+<!--        </div>-->
+
+    {% endfor %}
+    {% if object_list %}
+        {% include 'mainapp/includes/paginator.html' %}
+    {% else %}
+        <p>Ничего не найдено</p>
+    {% endif %}
+
+
 
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
   window.onerror = function (msg) {
     $("body").attr("JSError", msg);
   }
-
+  if(!!window.performance && window.performance.navigation.type == 2) {
+    window.location.reload();
+    }
 </script>
 {{ form.media.js }}
 {% endblock content %}

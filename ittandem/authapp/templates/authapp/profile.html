@@ -1,461 +1,524 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
-    {% if object.id != request.user.id %}
-    <div class="container">
-        <div class="row">
-            <div class="col-3 d-flex flex-column justify-content-center">
-                <div class="user-avatar">
-                    <img src="{% if user.avatar %}
+{% if object.id != request.user.id %}
+<div class="container">
+    <div class="row">
+        <div class="col-3 d-flex flex-column justify-content-center">
+            <div class="user-avatar">
+                <img style="width: 200px; height: 250px" ; src="{% if user.avatar %}
                         {{ user.avatar.url }}
                         {% else %}
                             https://im0-tub-ru.yandex.net/i?id=4623c59b0da60739693b1c3e7d21799a-l&n=13x
                     {% endif %}"
-                         alt="user-avatar"
-                         class="rounded-2">
-                </div>
-                <div class="deal">
-                    <form method="post" action="{% url 'authapp:deal' object.id %}">
+                     alt="user-avatar"
+                     class="rounded-2">
+            </div>
+            <div class="deal">
+                <form method="post" action="{% url 'authapp:deal' object.id %}">
                     {% csrf_token %}
-                        {% if button_style == 'add' %}
-                            <button class="btn btn-danger" type="submit" name="add" value="add">Обменяться контактами</button>
-                        {% endif %}
-                        {% if button_style == 'confirm' %}
-                            <button class="btn btn-danger" type="submit" name="confirm" value="confirm">Подтвердить</button>
-                        {% endif %}
-                    </form>
-                </div>
-                <div class="contact">
-                    {% if contact_view %}
-                     <p>Контакты видны</p>
-                    {% else %}
-                        <p>Контакты не видны, дождитесь подтверждения</p>
+                    {% if button_style == 'add' %}
+                    <br>
+                    <button class="btn btn-danger" type="submit" name="add" value="add">Обменяться контактами</button>
                     {% endif %}
-                </div>
-
-            </div>
-            <div class="col-9">
-                <ul class="nav nav-tabs profile-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Профиль</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Проекты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Контакты</a>
-                    </li>
-                </ul>
-                <div class="profile-data">
-                    <div class="profile-name">{{ user.username }}</div>
-                    <p class="profile-fullname">{{ user.first_name }} {{ user.last_name }}</p>
-                    <p class="profile-text">{{ user.about_me }}</p>
-                    <div class="profile-tags">
-                        Навыки:
-                        <ul class="list-inline">
-                            {% for skill in field_skill %}
-                            <li class="list-inline-item"><span class="badge badge-warning">{{ skill }}</span></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="profile-tags">
-                        Цели:
-                        <ul class="list-inline">
-                            {% for desire in field_desire %}
-                            <li class="list-inline-item"><span class="badge badge-warning">{{ desire }}</span></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <p class="profile-tags"></p>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    {% else %}
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Имя пользователя</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <!--left col-->
-
-
-            <div class="text-center">
-                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-thumbnail img-circle"
-                     alt="avatar">
-                <h6>Загрузите фото</h6>
-                <input type="file" class="text-center center-block file-upload">
-            </div>
-            </hr><br>
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Сайт <i class="fa fa-link fa-1x"></i></div>
-                <div class="panel-body"><a href="#">мойсайт.com</a></div>
-            </div>
-
-
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Активность <i class="fa fa-dashboard fa-1x"></i></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Лайки</strong></span> 13</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Посты</strong></span> 37</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Фоловеры</strong></span> 78</li>
-            </ul>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Соцсети</div>
-                <div class="panel-body">
-                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i
-                        class="fa fa-twitter fa-2x"></i> <i
-                        class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-sm-9">
-
-
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="first_name">
-                                    <h4>Имя</h4>
-                                </label>
-                                <input type="text" class="form-control" name="first_name" id="first_name"
-                                       placeholder="Ваше имя"
-                                       title="enter your first name if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="last_name">
-                                    <h4>Фамилия</h4>
-                                </label>
-                                <input type="text" class="form-control" name="last_name" id="last_name"
-                                       placeholder="Ваша фамилия"
-                                       title="enter your last name if any.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h4>Телефон</h4>
-                                </label>
-                                <input type="text" class="form-control" name="phone" id="phone"
-                                       placeholder="Введите номер телефона"
-                                       title="enter your phone number if any.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Email</h4>
-                                </label>
-                                <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="you@email.com"
-                                       title="enter your email.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Мнстоположение</h4>
-                                </label>
-                                <input type="email" class="form-control" id="location"
-                                       placeholder="Введите ваше местоположение"
-                                       title="Введите ваше местоположение">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password">
-                                    <h4>Пароль</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                       placeholder="Введите ваш пароль"
-                                       title="Введите ваш пароль">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password2">
-                                    <h4>Подтвердите пароль</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password2" id="password2"
-                                       placeholder="Введите ваш пароль"
-                                       title="enter your password2.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit"><i
-                                        class="glyphicon glyphicon-ok-sign"></i>
-                                    Сохранить
-                                </button>
-                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
-                                    Сбросить
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <hr>
-
-                </div>
-                <!--/tab-pane-->
-                <div class="tab-pane" id="messages">
-
-                    <h2></h2>
-
-                    <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="first_name">
-                                    <h4>First name</h4>
-                                </label>
-                                <input type="text" class="form-control" name="first_name" id="first_name"
-                                       placeholder="first name"
-                                       title="enter your first name if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="last_name">
-                                    <h4>Last name</h4>
-                                </label>
-                                <input type="text" class="form-control" name="last_name" id="last_name"
-                                       placeholder="last name"
-                                       title="enter your last name if any.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h4>Phone</h4>
-                                </label>
-                                <input type="text" class="form-control" name="phone" id="phone"
-                                       placeholder="enter phone"
-                                       title="enter your phone number if any.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="mobile">
-                                    <h4>Mobile</h4>
-                                </label>
-                                <input type="text" class="form-control" name="mobile" id="mobile"
-                                       placeholder="enter mobile number"
-                                       title="enter your mobile number if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Email</h4>
-                                </label>
-                                <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="you@email.com"
-                                       title="enter your email.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Location</h4>
-                                </label>
-                                <input type="email" class="form-control" id="location" placeholder="somewhere"
-                                       title="enter a location">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password">
-                                    <h4>Password</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                       placeholder="password"
-                                       title="enter your password.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password2">
-                                    <h4>Verify</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password2" id="password2"
-                                       placeholder="password2"
-                                       title="enter your password2.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit"><i
-                                        class="glyphicon glyphicon-ok-sign"></i>
-                                    Save
-                                </button>
-                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-                <!--/tab-pane-->
-                <div class="tab-pane" id="settings">
-
-
-                    <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="first_name">
-                                    <h4>First name</h4>
-                                </label>
-                                <input type="text" class="form-control" name="first_name" id="first_name"
-                                       placeholder="first name"
-                                       title="enter your first name if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="last_name">
-                                    <h4>Last name</h4>
-                                </label>
-                                <input type="text" class="form-control" name="last_name" id="last_name"
-                                       placeholder="last name"
-                                       title="enter your last name if any.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h4>Phone</h4>
-                                </label>
-                                <input type="text" class="form-control" name="phone" id="phone"
-                                       placeholder="enter phone"
-                                       title="enter your phone number if any.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="mobile">
-                                    <h4>Mobile</h4>
-                                </label>
-                                <input type="text" class="form-control" name="mobile" id="mobile"
-                                       placeholder="enter mobile number"
-                                       title="enter your mobile number if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Email</h4>
-                                </label>
-                                <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="you@email.com"
-                                       title="enter your email.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Location</h4>
-                                </label>
-                                <input type="email" class="form-control" id="location" placeholder="somewhere"
-                                       title="enter a location">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password">
-                                    <h4>Password</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                       placeholder="password"
-                                       title="enter your password.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password2">
-                                    <h4>Verify</h4>
-                                </label>
-                                <input type="password" class="form-control" name="password2" id="password2"
-                                       placeholder="password2"
-                                       title="enter your password2.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success pull-right" type="submit"><i
-                                        class="glyphicon glyphicon-ok-sign"></i> Save
-                                </button>
-                                <!--<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>-->
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
-            {% include 'tagapp/includes/form_style_profile.html' with  form=form_skill form2=form_desire %}
-            {% if user_bids %}
-            <div class="bids">
-
-                <h2>Заявки:</h2>
-                {% for bid in user_bids %}
-                <a href="{% url 'authapp:profile' bid.user.id %}">{{ bid.user }}</a>
-                <form method="post" action="{% url 'authapp:deal' bid.user.id %}">
-                    {% csrf_token %}
+                    {% if button_style == 'confirm' %}
                     <button class="btn btn-danger" type="submit" name="confirm" value="confirm">Подтвердить</button>
+                    {% endif %}
                 </form>
-                {% endfor %}
             </div>
-            {% endif %}
-            <!--/tab-pane-->
+
+
         </div>
-        <!--/tab-content-->
+        <script>
+            function openTab(tabName) {
+            var i;
+            var x = document.getElementsByClassName("tab");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        }
+        </script>
+        <div class="col-9">
+            <ul class="nav nav-tabs profile-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" onclick="openTab('Profile')">Профиль</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openTab('Projects')">Проекты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openTab('Contacts')">Контакты</a>
+                </li>
+            </ul>
+            <div id="Profile" class="tab" >
+                <div class="profile-data">
+                <div class="profile-name">
+                    Ник:
+                    <ul class="list-inline">
+
+                        <li class="list-inline-item"><span class="badge badge-warning">{{ user.username|title }}</span></li>
+
+                    </ul>
+                </div>
+
+
+                <div class="profile-tags">
+                    Навыки:
+                    <ul class="list-inline">
+                        {% for skill in field_skill %}
+                        <li class="list-inline-item"><span class="badge badge-warning">{{ skill }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="profile-tags">
+                    Цели:
+                    <ul class="list-inline">
+                        {% for desire in field_desire %}
+                        <li class="list-inline-item"><span class="badge badge-warning">{{ desire }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                    <p>О себе:</p>
+                    <p class="profile-text">{{ user.about_me }}</p>
+                <p class="profile-tags"></p>
+            </div>
+            </div>
+
+            <div id="Projects" class="tab" style="display:none">
+                <p>Проекты</p>
+                {% for project in object_list %}
+                    {{ request.user.project.all }}
+                {% endfor %}
+
+            </div>
+            <div id="Contacts" class="tab" style="display:none">
+                <div class="contact">
+                {% if contact_view %}
+                <p>
+                    Контакты:
+                </p>
+                <p class="badge badge-info">{{ user.link }}</p>
+                {% else %}
+                <p>Контакты не видны, дождитесь подтверждения</p>
+                {% endif %}
+            </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+{% else %}
+
+<div class="row" >
+    <div class="col-sm-3">
+        <!--left col-->
+
+        <hr style="width: 200px; margin-right: 100px;">
+        <div class="user-avatar">
+            <img style="width: 200px; height: 100%;margin-top:0px; " ; src="{% if user.avatar %}
+                        {{ user.avatar.url }}
+                        {% else %}
+                            https://im0-tub-ru.yandex.net/i?id=4623c59b0da60739693b1c3e7d21799a-l&n=13x
+                    {% endif %}"
+                 alt="user-avatar"
+                 class="rounded-2">
+        </div>
+        </hr><br>
+
+
+        <!--            <div class="panel panel-default">-->
+        <!--                <div class="panel-heading">Сайт <i class="fa fa-link fa-1x"></i></div>-->
+        <!--                <div class="panel-body"><a href="#">мойсайт.com</a></div>-->
+        <!--            </div>-->
+
+
+        <!--            <div class="panel panel-default">-->
+        <!--                <div class="panel-heading">Соцсети</div>-->
+        <!--                <div class="panel-body">-->
+        <!--                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i-->
+        <!--                        class="fa fa-twitter fa-2x"></i> <i-->
+        <!--                        class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>-->
+        <!--                </div>-->
+        <!--            </div>-->
 
     </div>
-    <!--/col-9-->
-    {% endif %}
+    <div class="col-sm-9">
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <hr>
+                <form class="form" action="##" method="post" id="registrationForm">
+                    <!--                    <div class="col-9" style="margin-left: 270px;margin-top: 30px;">-->
+                    <!--                        <ul class="nav nav-tabs profile-nav">-->
+                    <!--                            <li class="nav-item">-->
+                    <!--                                <a class="nav-link" href="#" onclick="openCity('Tokyo')">Мои навыки</a>-->
+                    <!--                            </li>-->
+                    <!--                            <li class="nav-item">-->
+                    <!--                                <a class="nav-link" href="#" onclick="openCity('Paris')">Хочу изучать</a>-->
+                    <!--                            </li>-->
+                    <!--                        </ul>-->
+                    <!--                    </div>-->
+
+
+                    <div class="form-group" style="width: 250px;">
+
+                        <div class="col-xs-6">
+                            <label for="first_name">
+                                <h4>Имя</h4>
+                            </label>
+
+                            <p>{{ user.username|title }}</p>
+                            <hr style="border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+
+                    </div>
+
+                    <div class="form-group" style="width: 250px;">
+
+                        <div class="col-xs-6">
+                            <label for="email">
+                                <h4>Email</h4>
+                            </label>
+                            <p>{{ user.email }}</p>
+                            <hr style="border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+
+                    </div>
+                    <div class="form-group" style="width: 250px;">
+
+                        <div class="col-xs-6">
+                            <label for="email">
+                                <h4>Контакты</h4>
+                            </label>
+                            <br>
+                            <a>{{ user.link }}</a>
+                            <hr style="border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));">
+                        </div>
+
+
+
+                    <div class="form-group" style="width: 250px; display: flex;">
+                        <div class="col-xs-12">
+                            <br>
+                            {% csrf_token %}
+                            <a href="{% url 'authapp:edit' %}" class="btn btn-lg btn-success"><i
+                                    class="glyphicon glyphicon-ok-sign"></i>
+                                Изменить
+                            </a>
+
+                        </div>
+                        <div class="col-xs-12" style="margin-left: 20px;">
+                            <br>
+                            {% csrf_token %}
+                            <a href="{% url 'project:ProjectCreate' %}" class="btn btn-lg btn-warning"><i
+                                    class="glyphicon glyphicon-ok-sign"></i>
+                                Создать проект
+                            </a>
+
+                        </div>
+                        <div class="col-xs-12" style="margin-left: 20px;">
+                            <br>
+                            {% csrf_token %}
+                            <a href="{% url 'project:ProjectView' %}" class="btn btn-lg btn-danger"><i
+                                    class="glyphicon glyphicon-ok-sign"></i>
+                                Список проектов
+                            </a>
+
+                        </div>
+                    </div>
+
+                </form>
+
+                <hr style="border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));">
+
+            </div>
+<!--            &lt;!&ndash;/tab-pane&ndash;&gt;-->
+<!--            <div class="tab-pane" id="messages">-->
+
+<!--                <h2></h2>-->
+
+<!--                <hr>-->
+<!--                <form class="form" action="##" method="post" id="registrationForm">-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="first_name">-->
+<!--                                <h4>First name</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="first_name" id="first_name"-->
+<!--                                   placeholder="first name"-->
+<!--                                   title="enter your first name if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="last_name">-->
+<!--                                <h4>Last name</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="last_name" id="last_name"-->
+<!--                                   placeholder="last name"-->
+<!--                                   title="enter your last name if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="phone">-->
+<!--                                <h4>Phone</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="phone" id="phone"-->
+<!--                                   placeholder="enter phone"-->
+<!--                                   title="enter your phone number if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-group">-->
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="mobile">-->
+<!--                                <h4>Mobile</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="mobile" id="mobile"-->
+<!--                                   placeholder="enter mobile number"-->
+<!--                                   title="enter your mobile number if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="email">-->
+<!--                                <h4>Email</h4>-->
+<!--                            </label>-->
+<!--                            <input type="email" class="form-control" name="email" id="email"-->
+<!--                                   placeholder="you@email.com"-->
+<!--                                   title="enter your email.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="email">-->
+<!--                                <h4>Location</h4>-->
+<!--                            </label>-->
+<!--                            <input type="email" class="form-control" id="location" placeholder="somewhere"-->
+<!--                                   title="enter a location">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="password">-->
+<!--                                <h4>Password</h4>-->
+<!--                            </label>-->
+<!--                            <input type="password" class="form-control" name="password" id="password"-->
+<!--                                   placeholder="password"-->
+<!--                                   title="enter your password.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="password2">-->
+<!--                                <h4>Verify</h4>-->
+<!--                            </label>-->
+<!--                            <input type="password" class="form-control" name="password2" id="password2"-->
+<!--                                   placeholder="password2"-->
+<!--                                   title="enter your password2.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="col-xs-12">-->
+<!--                            <br>-->
+<!--                            <button class="btn btn-lg btn-success" type="submit"><i-->
+<!--                                    class="glyphicon glyphicon-ok-sign"></i>-->
+<!--                                Save-->
+<!--                            </button>-->
+<!--                            <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+
+<!--            </div>-->
+<!--            &lt;!&ndash;/tab-pane&ndash;&gt;-->
+<!--            <div class="tab-pane" id="settings">-->
+
+
+<!--                <hr>-->
+<!--                <form class="form" action="##" method="post" id="registrationForm">-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="first_name">-->
+<!--                                <h4>First name</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="first_name" id="first_name"-->
+<!--                                   placeholder="first name"-->
+<!--                                   title="enter your first name if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="last_name">-->
+<!--                                <h4>Last name</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="last_name" id="last_name"-->
+<!--                                   placeholder="last name"-->
+<!--                                   title="enter your last name if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="phone">-->
+<!--                                <h4>Phone</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="phone" id="phone"-->
+<!--                                   placeholder="enter phone"-->
+<!--                                   title="enter your phone number if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="form-group">-->
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="mobile">-->
+<!--                                <h4>Mobile</h4>-->
+<!--                            </label>-->
+<!--                            <input type="text" class="form-control" name="mobile" id="mobile"-->
+<!--                                   placeholder="enter mobile number"-->
+<!--                                   title="enter your mobile number if any.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="email">-->
+<!--                                <h4>Email</h4>-->
+<!--                            </label>-->
+<!--                            <input type="email" class="form-control" name="email" id="email"-->
+<!--                                   placeholder="you@email.com"-->
+<!--                                   title="enter your email.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="email">-->
+<!--                                <h4>Location</h4>-->
+<!--                            </label>-->
+<!--                            <input type="email" class="form-control" id="location" placeholder="somewhere"-->
+<!--                                   title="enter a location">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="password">-->
+<!--                                <h4>Password</h4>-->
+<!--                            </label>-->
+<!--                            <input type="password" class="form-control" name="password" id="password"-->
+<!--                                   placeholder="password"-->
+<!--                                   title="enter your password.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="col-xs-6">-->
+<!--                            <label for="password2">-->
+<!--                                <h4>Verify</h4>-->
+<!--                            </label>-->
+<!--                            <input type="password" class="form-control" name="password2" id="password2"-->
+<!--                                   placeholder="password2"-->
+<!--                                   title="enter your password2.">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="col-xs-12">-->
+<!--                            <br>-->
+<!--                            <button class="btn btn-lg btn-success pull-right" type="submit"><i-->
+<!--                                    class="glyphicon glyphicon-ok-sign"></i> Save-->
+<!--                            </button>-->
+<!--                            &lt;!&ndash;<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--        </div>-->
+        <script>function openCity(cityName) {
+            var i;
+            var x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(cityName).style.display = "block";
+        }
+
+        </script>
+
+        <!--        <div class="w3-bar w3-black">-->
+        <!--            <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Мои навыки</button>-->
+        <!--            <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Хочу изучить</button>-->
+        <!--        </div>-->
+        <div class="col-9" style="margin-left: -20px;margin-top: 30px;">
+            <ul class="nav nav-tabs profile-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openCity('Tokyo')">Мои навыки</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openCity('Paris')">Хочу изучать</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="Paris" class="city" style="display:none">
+            {% include 'tagapp/includes/inc_form_tags.html' with form=form_desire actions=2 label_text="Хочу изучать" %}
+        </div>
+
+        <div id="Tokyo" class="city" style="display:none">
+            {% include 'tagapp/includes/form_style_profile.html' with form=form_skill %}
+        </div>
+
+
+        {% if user_bids %}
+        <div class="bids">
+
+            <h2>Заявки:</h2>
+            {% for bid in user_bids %}
+            <a href="{% url 'authapp:profile' bid.user.id %}">{{ bid.user }}</a>
+            <form method="post" action="{% url 'authapp:deal' bid.user.id %}">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit" name="confirm" value="confirm">Подтвердить</button>
+            </form>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!--/tab-pane-->
+    </div>
+    <!--/tab-content-->
+
+</div>
+<!--/col-9-->
+{% endif %}
 {% endblock %}

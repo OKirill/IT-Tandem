@@ -1,0 +1,294 @@
+grafana
+systems analysis
+web analytics
+ionic
+express.js
+spring boot
+Spring
+SQL
+SQLite
+STL
+Subversion
+SWIFT
+Symfony
+TCP/IP
+TDD
+TensorFlow
+TFS
+Three.js
+Tomcat
+Tornado
+TypeScript
+Ubuntu
+UML
+Underscore.js
+Unity
+Unix
+UX/UI
+Vagrant
+Virtualization
+Visual Studio
+VMware
+Vue.js
+WCF
+Web Design
+Web Development
+Webpack
+WebSockets
+WinForms
+WordPress
+WPF
+Xamarin
+Xaml
+Xcode
+Xen
+XHTML
+XML
+XSLT
+Yii
+Zabbix
+Zend Framework
+koa.js
+socket.io
+figma
+google analytics
+phalcon
+яндекс директ
+erp
+tableau
+vba
+.NET
+.NET core
+1С
+ActionScript
+Active Directory
+ADO.NET
+After Effects
+Agile
+AI
+Akka
+Amazon Web Services (AWS)
+Anaconda
+Android
+Angular
+Ansible
+Apache
+Apache Cassandra
+Apache Flink
+Apache Hive
+Apache Kafka
+Apache Spark
+Apache Storm
+Arduino
+ARM
+ASP.NET
+Asterisk
+Autocad
+Axapta
+Axure
+Backbone.js
+Bash
+BEM
+Big Data
+Bitrix
+Blockchain
+Boost
+Bootstrap
+C
+C#
+C++
+Capybara
+Celery
+Centos
+Chef
+Cisco
+Clojure
+Cloud Computing
+Cocoa
+Cocoa Touch
+CocoaPods
+CodeIgniter
+CoffeeScript
+Computer Science
+Computer Vision
+Corel Draw
+CouchDB
+CSS
+Cucumber
+Cuda
+D3.js
+Data Science
+Data Warehousing
+Databases
+Debian
+Deep Learning
+Delphi
+DevOps
+Django
+Docker
+Drupal
+Eclipse
+ElasticSearch
+Electron
+Elixir
+Embedded Software
+Ember.js
+Entity Framework
+Erlang
+ES6
+ES7
+высоконагруженные системы
+continuous integration
+business analysis
+business intelligence
+crm
+software development
+3d studio max
+babel
+kohana framework
+1c
+olap
+google adwords
+яндекс.метрика
+visio
+3d modeling
+java ee
+Ethereum
+ETL
+Ext.js
+F#
+Flash
+Flask
+FreeBSD
+Game Design
+Game Development
+GO
+Gradle
+Graphic Design
+GraphQL
+Groovy
+Grunt.js
+Gulp
+Hadoop
+Haskell
+Hbase
+Hibernate
+Highload
+HTML5
+Hyper-V
+Illustrator
+InDesign
+Information Security
+iOS
+ITIL
+Jade
+Jasmine
+JAVA
+JavaScript
+Jenkins
+JIRA
+JMeter
+Joomla
+JQuery
+Jquery Mobile
+Jquery UI
+json
+JUnit
+Kafka
+Keras
+Knockout.js
+Kotlin
+Kubernetes
+KVM
+Laravel
+Less
+LINQ
+Linux
+Lua
+Machine Learning
+Magento
+MapReduce
+MariaDB
+Matlab
+Maven
+Memcached
+Mercurial
+Meteor.js
+Microcontrollers
+Microservices
+Microsoft Azure
+Microsoft SQL Server
+Mobile Games
+Mobile Testing
+MongoDB
+MVC
+MVVM
+MySQL
+Nginx
+Nhibernate
+Node.js
+NoSQL
+NumPy
+NUnit
+Objective C
+OOD
+OpenCV
+OpenGL
+OpenVZ
+Oracle
+Oracle Database
+Oracle PL/SQL
+Pandas
+Perl
+Photoshop
+PHP
+Phoenix
+PhpUnit
+Pixi.js
+PL/SQL
+Polymer
+PostgreSQL
+Product Management
+Project Management
+Proxmox
+Puppet
+PySpark
+PyTest
+Python
+PyTorch
+QA
+QT
+R
+RabbitMQ
+Rack
+Rake
+React
+React Native
+Red Hat Linux
+Redis
+Redmine
+Redux
+Require.js
+REST
+RSpec
+Ruby
+Ruby on Rails
+Rust
+RxJava
+SaaS
+SAP
+Sass
+Scala
+Selenium
+SharePoint
+Shell scripting
+Sinatra
+Sketch
+SOA
+SOAP
+SoapUI
+Solaris
+Solidity
+Sphinx
+nuxt
+dart

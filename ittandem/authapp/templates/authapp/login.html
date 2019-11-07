@@ -1,4 +1,10 @@
 {% extends 'mainapp/base.html' %}
+{% load static %}
+    {% block css %}
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% endblock %}
 
 {% block content %}
 <div class="wrapper fadeInDown">
@@ -13,8 +19,8 @@
         <!-- Login Form -->
         <form action="{% url 'authapp:login' %}" method="post">
             {% csrf_token %}
-            {{ login_form.as_p }}
-            <input type="submit" class="fadeIn fourth" value="Log In">
+            {{ login_form.as_p}}
+            <input type="submit" class="fadeIn" value="Log In">
         </form>
 
         <!-- Remind Passowrd -->
