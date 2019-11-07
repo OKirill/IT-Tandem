@@ -20,8 +20,8 @@
 
         {% endfor %}
          {% if request.user.id == project.owner.id %}
-            <a href="{% url 'project:ProjectUpdate' project.id %}" >{% trans 'Редактировать' %} </a>
-            <a href="{% url 'project:ProjectDelete' project.id %}" >{% trans 'Удалить' %} </a>
+             <button class="btn-success"><a style="text-decoration: none;color: #000 !important;" href="{% url 'project:ProjectUpdate' project.id %}" >{% trans 'Редактировать' %} </a></button>
+             <button class="btn-danger"><a style="text-decoration: none;color: #000 !important;" href="{% url 'project:ProjectDelete' project.id %}" >{% trans 'Удалить' %} </a></button>
         {% endif %}
  </div>
 
