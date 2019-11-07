@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if object.id != request.user.id %}
-<div class="container">
+<div class="container" style="margin-bottom: 350px;">
     <div class="row">
         <div class="col-3 d-flex flex-column justify-content-center">
             <div class="user-avatar">
@@ -80,7 +80,7 @@
                     </ul>
                 </div>
                     <p>О себе:</p>
-                    <p class="profile-text">{{ user.about_me }}</p>
+                    <p class="profile-text"><span class="badge badge-secondary">{{ user.about_me }}</span></p>
                 <p class="profile-tags"></p>
             </div>
             </div>
@@ -112,7 +112,7 @@
 </div>
 {% else %}
 
-<div class="row" >
+<div class="row" style="margin-bottom: 200px;" >
     <div class="col-sm-3">
         <!--left col-->
 
