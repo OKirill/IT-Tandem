@@ -1,19 +1,30 @@
 {% extends 'mainapp/base.html' %}
-{% load staticfiles %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-
+{% endblock %}
 {% block content %}
-    <div class="user_avatar"><img style="height: 220px;width: 200px;" src="/media/{{ user.avatar }}"></div>
-    <form class="form-horizontal" action="{% url 'authapp:edit' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ edit_form.as_p }}
-        <input class="btn-success" type="submit" value="сохранить">
-        <button class="btn btn-lg btn-light" style="border: 1px solid #8adba0;border-radius: 5px; width: 200px;height: 55px;">
-            <a href="{% url 'main:index' %}" class="">
-                Главная
-            </a>
-        </button>
-    </form>
+    <div class="container">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+                <div class="user_avatar"><img style="height: 250px;width: 200px;" src="/media/{{ user.avatar }}"></div>
+                <form class="form-horizontal" action="{% url 'authapp:edit' %}" method="post"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ edit_form.as_p }}
+                    <br>
+                    <input class="btn btn-lg btn-secondary" style="border: 1px solid #8adba0;border-radius: 5px; width: 140px;height: 55px;"  type="submit" value="сохранить">
+                    <button class="btn btn-lg btn-secondaryt"
+                            style="border: 1px solid #8adba0;border-radius: 5px; width: 140px;height: 55px;">
+                        <a href="{% url 'main:index' %}" class="">
+                            Главная
+                        </a>
+                    </button>
+                </form>
+            </article>
+        </div>
+    </div>
 
 
 {% endblock %}
