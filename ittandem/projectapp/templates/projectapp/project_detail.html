@@ -26,10 +26,10 @@
         {% endfor %}
         {% if request.user.id == project.owner.id %}
             <div style="margin-bottom: 20px;">
-                <button class="btn btn-lg btn-light" style="border: 1px solid #8adba0;border-radius: 5px;"
-                        href="{% url 'project:ProjectUpdate' project.id %}">{% trans 'Редактировать' %} </a></button>
-                <button class="btn btn-lg btn-danger" style="border: 1px solid #8adba0;border-radius: 5px;"
-                        href="{% url 'project:ProjectDelete' project.id %}">{% trans 'Удалить' %} </a></button>
+                <button class="btn btn-lg btn-light" style="border: 1px solid #8adba0;border-radius: 5px;">
+                       <a href="{% url 'project:ProjectUpdate' project.id %}">{% trans 'Редактировать' %} </a></button>
+                <button class="btn btn-lg btn-danger" style="border: 1px solid #8adba0;border-radius: 5px;">
+                       <a href="{% url 'project:ProjectDelete' project.id %}">{% trans 'Удалить' %} </a></button>
             </div>
         {% endif %}
     </div>
