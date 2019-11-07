@@ -3,15 +3,17 @@
 
 
 {% block content %}
+    <div class="user_avatar"><img style="height: 220px;width: 200px;" src="/media/{{ user.avatar }}"></div>
     <form class="form-horizontal" action="{% url 'authapp:edit' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ edit_form.as_p }}
-        <input class="form-control" type="submit" value="сохранить">
+        <input class="btn-success" type="submit" value="сохранить">
+        <button class="btn btn-lg btn-light" style="border: 1px solid #8adba0;border-radius: 5px; width: 200px;height: 55px;">
+            <a href="{% url 'main:index' %}" class="">
+                Главная
+            </a>
+        </button>
     </form>
-    <button class="btn btn-round form-control last">
-        <a href="{% url 'main:index' %}" class="">
-            на главную
-        </a>
-    </button>
-    <div class="user_avatar"><img style="height: 220px;width: 200px;" src="/media/{{ user.avatar }}"></div>
+
+
 {% endblock %}
