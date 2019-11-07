@@ -51,35 +51,11 @@
 
 {% endfor %}
 </div>
-<!--    {% for object in object_list %}-->
-<!--        <div class="user_result" style="border: 2px solid #34b38a; margin-top: 5px; border-radius: 10px;width: 620px;margin-left: 100px;display: flex">-->
-<!--            <img style="width: 200px; height: 100%; border-radius: 5px;" src="{% if  object.avatar %}-->
-<!--                        {{ object.avatar.url }}-->
-<!--                        {% else %}-->
-<!--                            https://im0-tub-ru.yandex.net/i?id=4623c59b0da60739693b1c3e7d21799a-l&n=13x-->
-<!--                    {% endif %}"-->
-<!--                         alt="user-avatar"-->
-<!--                         class="rounded-2">-->
-<!--            <br>-->
-<!--           <div class="user_text" style="text-align: left;margin-left: 20px; font-size: 18px">-->
-<!--               <p><span style="font-weight: bold">Имя:</span> <a href="{% url 'authapp:profile' object.id %}">{{ object.username|title }}</a></p>-->
-
-<!--            <p>Знаю: {% for skill in object.skills.all %}<a href="{% url 'tagapp:search_skill' %}?stack={{ skill.tag.id }}">{{ skill.tag }} </a></p>-->
-<!--            {% endfor %}-->
-<!--            {% if object.desires.all %}-->
-<!--                <p>Хочу знать:-->
-<!--                {% for desire in object.desires.all %}<a href="{% url 'tagapp:search_desire' %}?stack={{ desire.tag.id }}">{{ desire.tag }} </a></p>-->
 
 
-<!--                {% endfor %}-->
 
-<!--            {% endif %}-->
-
-<!--           </div>-->
-<!--        </div>-->
-
-    {% endfor %}
     {% if object_list %}
+        <br>
         {% include 'mainapp/includes/paginator.html' %}
     {% else %}
         <p>Ничего не найдено</p>
