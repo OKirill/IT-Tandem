@@ -2,21 +2,21 @@
 {% load i18n %}
 {% block content %}
 
- <div>
+    <div>
 
         <h5>Название проекта:</h5>
-     <br>
+        <br>
         <p>{{ project.name }}</p>
         <hr>
         <p style="font-weight: bold">Краткое Описание:</p>
-            <p>
-                {{ project.short_desc }}
-            </p>
+        <p>
+            {{ project.short_desc }}
+        </p>
         <hr>
         <p style="font-weight: bold">Описание:</p>
-            <p>
-                {{ project.desc }}
-            </p>
+        <p>
+            {{ project.desc }}
+        </p>
         <hr>
         <p>Технологии: </p>
         {% for tag in project.tags.all %}
@@ -24,11 +24,15 @@
             <hr>
 
         {% endfor %}
-         {% if request.user.id == project.owner.id %}
-             <button class="btn-success"><a style="text-decoration: none;color: #000 !important;" href="{% url 'project:ProjectUpdate' project.id %}" >{% trans 'Редактировать' %} </a></button>
-             <button class="btn-danger"><a style="text-decoration: none;color: #000 !important;" href="{% url 'project:ProjectDelete' project.id %}" >{% trans 'Удалить' %} </a></button>
+        {% if request.user.id == project.owner.id %}
+            <div style="margin-bottom: 20px;">
+                <button class="btn btn-lg btn-light" style="border: 1px solid #8adba0;border-radius: 5px;"
+                        href="{% url 'project:ProjectUpdate' project.id %}">{% trans 'Редактировать' %} </a></button>
+                <button class="btn btn-lg btn-danger" style="border: 1px solid #8adba0;border-radius: 5px;"
+                        href="{% url 'project:ProjectDelete' project.id %}">{% trans 'Удалить' %} </a></button>
+            </div>
         {% endif %}
- </div>
+    </div>
 
 
 
