@@ -35,7 +35,7 @@
             <div class="card-body">
                 <h5 class="card-title">Имя:</span> <a href="{% url 'authapp:profile' object.id %}">{{ object.username|title }}</a></h5>
                 <hr>
-              <p class="card-text">Знаю: {% for skill in object.skills.all %}<a href="{% url 'tagapp:search_skill' %}?stack={{ skill.tag.id }}">{{ skill.tag }} </a></p>
+              <p class="card-text" style="display: contents;">Знаю: {% for skill in object.skills.all %}<a style="display: contents;" href="{% url 'tagapp:search_skill' %}?stack={{ skill.tag.id }}">{{ skill.tag }} </a></p>
                 <hr>
                 {% endfor %}
               {% if object.desires.all %}
