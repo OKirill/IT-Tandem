@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+# from mainapp.models import Article
 
 
 class User(AbstractUser):
@@ -7,6 +8,7 @@ class User(AbstractUser):
     about_me = models.TextField(max_length=512, blank=True, verbose_name='О себе')
     status = models.CharField(max_length=10, verbose_name='Статус пользователя', blank=True)
     link = models.TextField(max_length=46, verbose_name='Ссылка на соцсеть', blank=True)
+    # user_article = models.ForeignKey(Article, null=True, verbose_name='Статья', on_delete=models.PROTECT)
 
 
 class Contact(models.Model):

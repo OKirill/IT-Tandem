@@ -24,6 +24,11 @@
             <hr>
 
         {% endfor %}
+         <div style="margin-bottom: 20px;">
+                <button class="btn btn-lg btn-light" style="border: 1px solid #8adba0;border-radius: 5px;">
+                       <a href="{% url 'project:ProjectView' %}">{% trans 'Назад' %} </a></button>
+
+            </div>
         {% if request.user.id == project.owner.id %}
             <div style="margin-bottom: 20px;">
                 <button class="btn btn-lg btn-light" style="border: 1px solid #8adba0;border-radius: 5px;">
